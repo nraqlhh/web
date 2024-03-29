@@ -1,0 +1,49 @@
+﻿@model web.Models.TBUserInfo
+
+<link href="~/Content/Create.css" rel="stylesheet" />
+
+<h2 class="form-title">Create New User</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-container">
+        <div class="form-section">
+            <label for="UsernameUs">Username:</label>
+            <input type="text" id="UsernameUs" name="UsernameUs" class="form-control" required>
+            @Html.ValidationMessageFor(model => model.UsernameUs, "", new { @class = "text-danger validation-message" })
+        </div>
+
+        <div class="form-section">
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" name="Email" class="form-control" required>
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger validation-message" })
+        </div>
+
+        <div class="form-section">
+            <label for="PasswordUs">Password:</label>
+            <input type="password" id="PasswordUs" name="PasswordUs" class="form-control" required>
+            @Html.ValidationMessageFor(model => model.PasswordUs, "", new { @class = "text-danger validation-message" })
+        </div>
+
+        <div class="form-section">
+            <label for="RePasswordUs">Confirm Password:</label>
+            <input type="password" id="RePasswordUs" name="RePasswordUs" class="form-control" required>
+            @Html.ValidationMessageFor(model => model.RePasswordUs, "", new { @class = "text-danger validation-message" })
+        </div>
+
+        <div class="form-section">
+            <button type="submit" class="btn btn-primary btn-lg">Create Account</button>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "User", "Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

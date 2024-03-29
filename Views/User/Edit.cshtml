@@ -1,0 +1,127 @@
+﻿@model web.Models.TBUserInfo
+
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<style>
+    /* Basic styles for a clean and modern look */
+    body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0rem;
+    }
+
+    /* Maintain existing styles for the header section */
+    .header {
+        /* Your existing CSS styles for the header */
+    }
+
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto; /* Center the form horizontally */
+        padding: 2rem;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-top: 2rem; /* Add some space after the header */
+    }
+
+    .form-title {
+        text-align: center; /* Center the title text */
+        margin: 0; /* Remove any margins that might interfere */
+        margin-bottom: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-validation {
+        color: red;
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+
+    .form-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+        .form-button:hover {
+            background-color: #0069d9;
+        }
+</style>
+
+<header class="header">
+</header>
+
+<h2 class="form-title">Edit User</h2>
+
+<div class="form-container">
+
+    <form method="post" action="@Url.Action("Edit", "User")">
+
+        @using (Html.BeginForm())
+
+
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label class="form-label" for="UsernameUs">Username</label>
+                <input type="text" class="form-input" id="UsernameUs" name="UsernameUs" value="@Model.UsernameUs">
+                @Html.ValidationMessageFor(model => model.UsernameUs, "", new { @class = "form-validation" })
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="Email">Email</label>
+                <input type="email" class="form-input" id="Email" name="Email" value="@Model.Email">
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "form-validation" })
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="PasswordUs">Password</label>
+                <input type="password" class="form-input" id="PasswordUs" name="PasswordUs" value="@Model.PasswordUs" readonly>
+                @Html.ValidationMessageFor(model => model.PasswordUs, "", new { @class = "form-validation" })
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="form-button">
+            </div>
+        }
+    </form>
+
+</div>
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordField = document.getElementById('PasswordUs');
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+        } else {
+            passwordField.type = 'password';
+        }
+    }
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "User", "Home")
+</div>

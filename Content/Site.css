@@ -1,0 +1,25 @@
+﻿/* site.css */
+
+/* Padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding: 15px;
+}
+
+/* Override the default bootstrap behavior */
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+
+/* Styles for indicating danger */
+.text-danger {
+    color: #dc3545;
+}
+
+
+.notification-error {
+    color: red;
+}
+
+

@@ -1,0 +1,83 @@
+﻿@model web.Models.TBUserInfo
+
+@{
+    ViewBag.Title = "Signup";
+}
+
+<link href="~/Content/login.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-QsHKxYAZupnullWqxt3z3VwBOvCBf2qZ2+bqOYjfWCrHnAeAeAeRiatTJXkTyhQsGkQr/6SEjtInsaneOpz2Lw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="center-form">
+    <div class="form-container">
+        <h2>Sign up</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    @Html.LabelFor(model => model.UsernameUs, htmlAttributes: new { @class = "control-label visually-hidden" })
+                    @Html.EditorFor(model => model.UsernameUs, new { htmlAttributes = new { @class = "form-control", placeholder = "Username" } })
+                    @Html.ValidationMessageFor(model => model.UsernameUs, "", new { @class = "text-danger" })
+                </div>
+            </div><p></p>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label visually-hidden" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div><p></p>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                    @Html.LabelFor(model => model.PasswordUs, htmlAttributes: new { @class = "control-label visually-hidden" })
+                    @Html.EditorFor(model => model.PasswordUs, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "Password" } })
+                    @Html.ValidationMessageFor(model => model.PasswordUs, "", new { @class = "text-danger" })
+                </div>
+            </div><p></p>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                    @Html.LabelFor(model => model.RePasswordUs, htmlAttributes: new { @class = "control-label visually-hidden" })
+                    @Html.EditorFor(model => model.RePasswordUs, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "Confirm Password" } })
+                    @Html.ValidationMessageFor(model => model.RePasswordUs, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group notification-container">
+                @if (!string.IsNullOrEmpty(ViewBag.Notification))
+                {
+                    <span class="@(ViewBag.Notification.Contains("already exists") ? "text-danger" : "text-success")">@ViewBag.Notification</span>
+                    <input type="hidden" id="registrationSuccess" value="@(ViewBag.RegistrationSuccess ?? false)" />
+
+                }
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-login">Create</button><p></p>
+                <span style="vertical-align: middle;">Already registered? </span><a href="@Url.Action("Login", "Home")">Login</a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/registerationAlert.js"></script>
+
+}

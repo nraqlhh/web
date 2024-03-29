@@ -1,0 +1,36 @@
+﻿@model web.Models.TBUserInfo
+
+@{
+    ViewBag.Title = "User Details";
+}
+
+<link href="~/Content/Details.css" rel="stylesheet" />
+
+<div class="user-details-card">
+    <h2 class="user-details-header">User Details</h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <p class="user-details-row"><strong>ID:</strong> @Model.IdUs</p>
+            <p class="user-details-row"><strong>Username:</strong> @Model.UsernameUs</p>
+            <p class="user-details-row"><strong>Email:</strong> @Model.Email</p>
+            <p class="user-details-row"><strong>Password:</strong> @MaskPassword(Model.PasswordUs)</p>
+        </div>
+    </div>
+
+    <a href="@Url.Action("User")" class="user-details-button">Back to List</a>
+</div>
+
+@functions {
+    // Function to mask the password with asterisks or dots
+    public string MaskPassword(string password)
+    {
+        // Define the masking character (asterisks or dots)
+        char maskingCharacter = '*'; // Change this to '.' if you prefer dots
+
+        // Create a new string with the masking character repeated for the length of the password
+        string maskedPassword = new string(maskingCharacter, password.Length);
+
+        return maskedPassword;
+    }
+}
